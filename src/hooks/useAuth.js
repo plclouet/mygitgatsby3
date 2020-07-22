@@ -5,6 +5,7 @@ const apiURL = "https://frozen-dawn-43758.herokuapp.com"
 
 
 const DEFAULT_STATE = {
+  state: null,
   jwt: null,
   user: {},
   loggedIn: false, 
@@ -23,7 +24,7 @@ const reducer = (state, action) => {
   }
 }
 
-const AuthContext = createContext()
+const AuthContext = createContext(DEFAULT_STATE)
 
 const AuthProvider = ({ children }) => (
   <AuthContext.Provider value={useReducer(reducer, DEFAULT_STATE)}>
@@ -39,9 +40,9 @@ export const wrapRootElement = ({ element }) => (
 
 const useAuth = () => {
   const [state, dispatcher] = useContext(AuthContext)
-  console.log(state)
-  
  
+  const isAuthenticated = state.loggedIn && Object.keys(state.user).length
+  console.log(isAuthenticated, apiURL)
   const login = (credentials) => new Promise(async (resolve, reject) => {
     try{
       const { data: payload } = await axios.post(`${apiURL}/auth/local`, credentials)
@@ -55,7 +56,7 @@ const useAuth = () => {
   const logout = () => {
     dispatcher({ type: 'LOGOUT' })
   }
-  const isAuthenticated = state.loggedIn && Object.keys(state.user).length
+  
   return { state, isAuthenticated, login, logout } 
 }
 
