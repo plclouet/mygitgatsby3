@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useReducer } from 'react'
 import axios from 'axios'
-const apiURL = process.env.GATSBY_API_URL
+//const apiURL = process.env.GATSBY_API_URL
+const apiURL = "https://frozen-dawn-43758.herokuapp.com"
 
 const DEFAULT_STATE = {
   jwt: null,
