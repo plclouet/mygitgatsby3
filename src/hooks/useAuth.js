@@ -41,7 +41,7 @@ const useAuth = () => {
   const [state, dispatcher] = useContext(AuthContext)
  
   const isAuthenticated = state.loggedIn && Object.keys(state.user).length
-  console.log(isAuthenticated, apiURL)
+  //console.log( state.loggedIn)
   const login = (credentials) => new Promise(async (resolve, reject) => {
     try{
       const { data: payload } = await axios.post(`${apiURL}/auth/local`, credentials)
@@ -55,8 +55,9 @@ const useAuth = () => {
   const logout = () => {
     dispatcher({ type: 'LOGOUT' })
   }
-  
+  console.log(state)
   return { state, isAuthenticated, login, logout } 
+  
 }
 
 export default useAuth
