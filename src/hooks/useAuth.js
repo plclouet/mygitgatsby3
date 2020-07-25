@@ -5,7 +5,6 @@ const apiURL = "https://frozen-dawn-43758.herokuapp.com"
 
 
 const DEFAULT_STATE = {
-  state: null,
   jwt: null,
   user: {},
   loggedIn: false, 
@@ -24,7 +23,7 @@ const reducer = (state, action) => {
   }
 }
 
-const AuthContext = createContext(null)
+const AuthContext = createContext()
 
 const AuthProvider = ({ children }) => (
   <AuthContext.Provider value={useReducer(reducer, DEFAULT_STATE)}>
