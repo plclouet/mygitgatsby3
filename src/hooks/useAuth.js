@@ -24,7 +24,7 @@ const reducer = (state, action) => {
   }
 }
 
-const AuthContext = createContext(DEFAULT_STATE)
+const AuthContext = createContext(null)
 
 const AuthProvider = ({ children }) => (
   <AuthContext.Provider value={useReducer(reducer, DEFAULT_STATE)}>
